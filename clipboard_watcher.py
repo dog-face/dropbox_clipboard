@@ -3,7 +3,6 @@
 import time
 import threading
 import pyperclip
-import daemon
 
 
 def is_dropbox_link(clipboard_content):
@@ -15,12 +14,14 @@ def make_dl_link(url):
 	pyperclip.copy(url.replace("www", "dl"))
 
 class ClipboardWatcher(threading.Thread):
-	def __init__(self, predicate, callback, pause=5.):
+	def __init__(self, predicate, callback, num, pause=5.):
 		super(ClipboardWatcher, self).__init__()
 		self._predicate = predicate
 		self._callback = callback
 		self._pause = pause
 		self._stopping = False
+		self.num=num
+		print("ClipboardWatcher " + str(self.num) + " starting")
 
 	def run(self):
 		recent_value = ""
@@ -34,23 +35,29 @@ class ClipboardWatcher(threading.Thread):
 
 	def stop(self):
 		self._stopping = True
+		print("ClipboardWatcher " + str(self.num) + " stopping")
+
 
 def watch_clipboard():
-	watcher = ClipboardWatcher(is_dropbox_link,
-							   make_dl_link,
+	watchers = []
+	for i in range(0, 10):
+		new_watcher = ClipboardWatcher(is_dropbox_link,
+							   make_dl_link,num=i,
 							   pause=5)
-	watcher.start()
+		watchers.append(new_watcher)
+		new_watcher.start()
+		
 	while True:
 		try:
 			time.sleep(10)
 		except KeyboardInterrupt:
-			watcher.stop()
+			for watcher in watchers:
+				watcher.stop()
 			break
 
 	
 def main():
-	with daemon.DaemonContext():
-		watch_clipboard()
+	watch_clipboard()
 
 if __name__ == "__main__":
 	main()
