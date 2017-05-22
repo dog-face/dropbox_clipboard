@@ -1,0 +1,12 @@
+Cross-platform clipboard watching script. In this case it's designed to watch for "www.dropbox.com" links and turn them into "dl.dropbox.com" links. Here's a comparison of the performance difference you can expect when sharing images. Try it yourself and see the difference in load times. 
+
+before: https://www.dropbox.com/s/on67oo36o44872c/Screenshot%202017-05-22%2014.13.18.png?dl=0
+after: https://dl.dropbox.com/s/on67oo36o44872c/Screenshot%202017-05-22%2014.13.18.png?dl=0
+
+Current settings: 10 threads which each check the clipboard ever 5 seconds. Should give approximately .5 second delay until your clipboard is updated. 
+
+In order to keep this running in the background, I recommend nohup: 
+
+nohup ./clipboard_watcher.py &
+
+Alternatively, you could use the python-daemon package. 
