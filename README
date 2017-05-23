@@ -3,7 +3,7 @@ Cross-platform clipboard watching script. In this case it's designed to watch fo
 before: https://www.dropbox.com/s/on67oo36o44872c/Screenshot%202017-05-22%2014.13.18.png?dl=0
 after: https://dl.dropbox.com/s/on67oo36o44872c/Screenshot%202017-05-22%2014.13.18.png?dl=0
 
-Current settings: 10 threads which each check the clipboard ever 5 seconds. Should give approximately .5 second delay until your clipboard is updated. 
+Current settings: 4 threads which each check the clipboard every 2 seconds. Should give approximately .5 second delay until your clipboard is updated.
 
 In order to keep this running in the background, I recommend nohup: 
 
