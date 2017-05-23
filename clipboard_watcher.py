@@ -41,9 +41,7 @@ class ClipboardWatcher(threading.Thread):
 def watch_clipboard():
 	watchers = []
 	for i in range(0, 10):
-		new_watcher = ClipboardWatcher(is_dropbox_link,
-							   make_dl_link,num=i,
-							   pause=5)
+		new_watcher = ClipboardWatcher(is_dropbox_link, make_dl_link, num=i, pause=5)
 		watchers.append(new_watcher)
 		new_watcher.start()
 		
