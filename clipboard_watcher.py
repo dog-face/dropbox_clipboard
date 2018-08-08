@@ -11,7 +11,7 @@ def is_dropbox_link(clipboard_content):
 	return False
 
 def make_dl_link(url):
-	pyperclip.copy(url.replace("www", "dl"))
+	pyperclip.copy(url.replace("www", "dl").replace("?dl=0", ""))
 
 class ClipboardWatcher(threading.Thread):
 	def __init__(self, predicate, callback, num, pause=5.):
@@ -20,7 +20,7 @@ class ClipboardWatcher(threading.Thread):
 		self._callback = callback
 		self._pause = pause
 		self._stopping = False
-		self.num=num
+        self.num=num
 		print("ClipboardWatcher " + str(self.num) + " starting")
 
 	def run(self):
@@ -44,7 +44,7 @@ def watch_clipboard():
 		new_watcher = ClipboardWatcher(is_dropbox_link, make_dl_link, num=i, pause=2)
 		watchers.append(new_watcher)
 		new_watcher.start()
-		
+
 	while True:
 		try:
 			time.sleep(10)
@@ -53,7 +53,7 @@ def watch_clipboard():
 				watcher.stop()
 			break
 
-	
+
 def main():
 	watch_clipboard()
 
