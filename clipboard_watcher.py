@@ -6,6 +6,7 @@ import pyperclip
 
 def is_dropbox_link(clipboard_content):
     if (
+        clipboard_content is not None and
         clipboard_content.startswith("https://")
         and "www.dropbox.com" in clipboard_content
         and "dl=0" in clipboard_content
