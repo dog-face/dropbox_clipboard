@@ -8,3 +8,6 @@ In order to keep this running in the background, I recommend nohup:
 nohup ./clipboard_watcher.py &
 
 Alternatively, you could use the python-daemon package. 
+
+
+NOTE: I have this script set to run on startup on my mac. The script itself is very light and uses almost no CPU usage. When run through automator, however, the 'ScriptMonitor' process starts up and uses 20% of my CPU. Killing ScriptMonitor does not break the script, and it fixes my problem so even though this is hacky af I am going to do it anyway
